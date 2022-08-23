@@ -11,9 +11,9 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
-    name = Column(String(50), nullable=False)
-    password = Column(String(50), nullable=False)
-    email = Column(String(50), nullable=False)
+    name = Column(String(50), nullable=True)
+    password = Column(String(50), nullable=True, unique=True)
+    email = Column(String(50), nullable=True)
 
     
    
@@ -43,7 +43,7 @@ class Favorites(Base):
     like_id = Column(Integer, nullable=False)
     characters_id = Column(Integer, ForeignKey('characters.id'))
     planets_id = Column(Integer, ForeignKey('planets.id'))
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     characters = relationship(Characters)
     planets = relationship(Planets)
     user = relationship(User)
